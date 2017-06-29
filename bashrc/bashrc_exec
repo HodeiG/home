@@ -1,0 +1,4 @@
+# Execute 'ls' after oppening the console
+if tty > /dev/null 2>&1; then
+    ls
+fi

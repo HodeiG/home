@@ -1,0 +1,9 @@
+# ALIASES
+alias cd='_cl' # Change directory and ls
+alias pwd='_pwd' # Change directory and ls
+alias ..='_go_back' # Change directory and ls
+alias sshc="_sshc"
+alias cdf="_cdf" # Find directory and change to that directory
+alias svncd="_svncd" # Give option to choose SVN directory that contains a changed file
+#> To join all the files: cat split_files* > newfile
+alias ack="_ack"
