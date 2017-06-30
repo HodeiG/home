@@ -82,6 +82,10 @@ filetype plugin on
 " Source indentation
 :so $HOME/.vim/source/indentation.vim
 " Source escape
+" TODO
+" I could use the following command to check keyboard layout
+" and set different escape character
+" setxkbmap -query | grep layout
 if $USER == 'wome'
     :so $HOME/.vim/source/escape_n.vim
 else
