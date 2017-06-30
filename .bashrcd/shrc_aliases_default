@@ -1,0 +1,81 @@
+# If conditions: http://tille.garrels.be/training/bash/ch07.html
+# ALIASES
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    #eval "`dircolors -b`"
+    # http://diego8989.esdebian.org/38521/personalizacion-lscolors
+    eval "`dircolors -b $HOME/.dir_colors`"
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+alias 7zc='7z a'
+alias 7zx='7z x'
+alias vi='vim'
+#alias vim='vim -p'
+alias feh='feh -d'
+alias fehg='feh -g 400x400'
+alias lr='ls -rt'
+alias ll='ls -lrt'
+alias la='ls -a'
+alias ld='ls -p | grep "/" | sed -e "s/\///g" -e "s/$/\"/g" -e "s/^/\"/g"'
+alias lss="ll -a | grep '^l' | awk '{ print \$(9) }' | xargs ls -la --color=auto"
+alias unzipx='unzip -d .' # Zip extract in the current directory
+alias unzipd='unzip -d' # Zip extract in the chosen directory
+alias unzipl='unzip -l'   # Zip list
+alias apts='apt-cache search'
+alias apti='apt-get install'
+alias aptr='apt-get remove'
+alias ifaddr="ifconfig | grep -B 1 'inet addr'"
+alias pl="fc -s | less" # Pipe previous command to "less"
+alias du_hs='du -cshm * | sort -h'
+# Python debugger (it uses custome package sys_libs.debug)
+alias pdb='python -m sys_libs.debug'
+# R language graphical interface JGR
+alias JGR='R -e library\('JGR'\) -e JGR\(\)'
+alias psg='ps aux | grep -v grep | grep'
+alias ps_mem="ps aux | awk '{ print \$4,\$11}'  | grep -v 0.0 | sort -g"
+# SVN aliases
+alias sst="svn status | grep ^[MCADR]"
+# Get a list of all the modified FILES by subversion (exclude directories).
+alias sst_files="svn status | grep ^[MCADR] | awk '{ print \$(NF) }'"
+alias sst_just_files="svn status | grep ^[MCADR] | awk '{ print \$(NF) }' | xargs -I{} sh -c 'find {} -type f -name \$(basename {})'"
+alias sstc="svn status --changelist MF | grep ^[-MCADR]"
+alias sstc_clear="svn changelist --remove --changelist MF --depth infinity ."
+alias sstc_update="sstc_clear &> /dev/null; sst | awk '{ print \$(NF) }' | xargs svn changelist MF; sstc"
+alias sstc_files="svn st --changelist MF | grep ^[MCADR] | awk '{ print \$(NF) }'"
+alias sstc_remove="sstc_files | vim_pipe.pl | xargs svn changelist --remove"
+alias svnd='svn --diff-cmd "diff" --extensions "-y --width 230" diff | colordiff | less -r -F'
+alias svnl='svn log -v -l'
+alias svnbackup='svn diff > /tmp/backup_$(date +%s).patch; echo "Backup created:" $(ls -rtd /tmp/* | tail -n 1)'
+alias svnrf='svnbackup; sst_files | vim_pipe.pl | xargs svn revert'
+alias svnra='svnbackup; svn revert -R .'
+alias svnccollab='sst_files | vim_pipe.pl | xargs ccollab addsvndiffs'
+alias svnmeld='svn diff --diff-cmd=meld'
+alias vimsstc='vim $(sstc_files)'
+alias vims='vim $(sst_just_files)'
+alias vimgit='vim $(gitsst_files_no_cached;gitsst_files_cached)'
+#Download files with specific extension
+# wget_ext rpm https://<yum_repo_host>/repo
+alias wget_ext='wget --no-check-certificate -r -np -nH -nd -A'
+alias wgets='wget --no-check-certificate'
+# GIT aliases
+# List untracked (others) or modified files.
+alias gst="git status --porcelain -u"
+alias gitd_no_cached='git diff --relative --no-prefix'
+alias gitd_cached='git diff --cached --relative --no-prefix'
+alias gitd_commit='git log -n 1 | grep -Po "(?<=commit )(.*)" | xargs -I{} git diff {}~ {}'
+alias gitsst_no_cached='git diff --relative --name-status'
+alias gitsst_cached='git diff --cached --relative --name-status'
+alias gitsst_commit='git show --relative --name-only --pretty="format:"'
+alias gitmeld_no_cached='git difftool -y --tool meld'
+alias gitmeld_cached='git difftool -y --cached --tool meld'
+alias gitmeld_commit='git log -n 1 | grep -Po "(?<=commit )(.*)" | xargs -I{} git difftool {}~ {} --tool meld -y'
+alias gitsst_files_no_cached='git diff --relative --name-only'
+alias gitsst_files_cached='git diff --cached --relative --name-only'
+alias gitsst_files_commit='git show --relative --name-only --pretty="format:"'

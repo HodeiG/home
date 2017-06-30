@@ -1,0 +1,34 @@
+! Web: http://rollingrelease.com/system/2010/09/xmodmap-hints-and-tips
+! Web: https://bbs.archlinux.org/viewtopic.php?id=83027
+! Get current keys: xmodmap -pke > ~/xmodmap
+! I want to remap some keys to work in a different way.
+! For this, first I have to change the modifier keys
+! (special keys that can be held at the same time
+! to modify its output). Example: Ctrl+C
+! Use xmodmap to see modifiers.
+! Use xev to see keycodes and keysyms
+
+! Add Windows key to Control modifier
+remove mod4 = Super_L
+add mod1 = Super_L
+! Remove Alt_L from Control modifier, because I'm
+! not using it any longer as a Control key
+! and map it to Switch_mode
+remove mod1 = Alt_L
+keycode 64 = Mode_switch
+! The keycode command maps a KeyCode to a number of KeySyms. The order
+! of the KeySyms is important as it represents how the KeySyms are
+! derived.
+! 	1. The key pressed alone
+! 	2. With the Shift modifier
+! 	3. The key pressed along with the Mode_switch key
+! 	4. With Mode_switch AND Shift
+keycode 43 = h H Left
+keycode 44 = j J Down 
+keycode 45 = k K Up
+keycode 46 = l L Right
+keycode 13 = 4 dollar End
+keycode 19 = 0 equal Home
+keycode 39 = s S Delete
+keycode 40 = d D BackSpace
+keycode 41 = f F Escape 

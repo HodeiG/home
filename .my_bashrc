@@ -1,0 +1,13 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+export LANG="en_US.UTF-8"
+
+source $HOME/home/.bashrcd/bashrc_export
+source $HOME/home/.bashrcd/functions.sh
+source $HOME/home/.bashrcd/aliases_functions
+source $HOME/home/.bashrcd/bashrc_exec

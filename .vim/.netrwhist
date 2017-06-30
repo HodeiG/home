@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/hodei/src/git/rmc-ui-e/src/main/webapp/js/rmc/presenter/msexchange'
+let g:netrw_dirhist_2='/home/hodei/src/git/rmc-ui-e/src/main/webapp/js/rmc/lang'
+let g:netrw_dirhist_3='/home/hodei/src/git/rmc-ui-e/src/main/webapp/js/rmc/view/protectionpolicies'
+let g:netrw_dirhist_4='/home/hodei/Dropbox/linux_config/config/vim/plugin'
+let g:netrw_dirhist_5='/home/hodei/src/git/rmc-ui-e/src/main/webapp/js/rmc/view/msexchange/databases'
+let g:netrw_dirhist_6='/home/hodei/src/git/rmc-ui-e/src/main/webapp'
