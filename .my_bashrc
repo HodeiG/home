@@ -7,7 +7,7 @@ fi
 
 export LANG="en_US.UTF-8"
 
-source $HOME/home/.bashrcd/bashrc_export
-source $HOME/home/.bashrcd/functions.sh
-source $HOME/home/.bashrcd/aliases_functions
-source $HOME/home/.bashrcd/bashrc_exec
+source $HOME/.bashrcd/bashrc_export
+source $HOME/.bashrcd/functions.sh
+source $HOME/.bashrcd/aliases_functions
+source $HOME/.bashrcd/bashrc_exec
