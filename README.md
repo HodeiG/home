@@ -2,16 +2,10 @@
 
 ### Installation
 
-Clone instructions.
+The best recommended way to install these files is to download the ZIP file and
+copy the content to the $HOME directory.
 
-```sh
-$ cd ~
-$ git init
-$ git remote add origin https://github.com/HodeiG/home.git
-$ git pull origin master
-```
-
-Modify your .bashrc and append the following line at the end of file.
+Finally, modify your .bashrc and append the following line at the end of file.
 
 ```sh
 source $HOME/.my_bashrc
@@ -22,7 +16,8 @@ source $HOME/.my_bashrc
 Create SSH key and add to the SSH-AGENT. Also, upload public key to github.
 
 ```sh
-git remote set-url origin git@github.com:HodeiG/home.gi
+git remote set-url origin git@github.com:HodeiG/home.git
+git pull origin master
 ssh-keygen -t rsa -b 4096 - C "your_email@example.com"
 chmod 600 ~/.ssh/id_rsa
 ssh-add ~/.ssh/id_rsa
