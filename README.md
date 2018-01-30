@@ -22,6 +22,7 @@ source $HOME/.my_bashrc
 Create SSH key and add to the SSH-AGENT. Also, upload public key to github.
 
 ```sh
+git remote set-url origin git@github.com:HodeiG/home.gi
 ssh-keygen -t rsa -b 4096 - C "your_email@example.com"
 chmod 600 ~/.ssh/id_rsa
 ssh-add ~/.ssh/id_rsa
