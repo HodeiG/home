@@ -5,9 +5,8 @@ if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
-export LANG="en_US.UTF-8"
-
 source $HOME/.bashrcd/bashrc_export
 source $HOME/.bashrcd/functions.sh
 source $HOME/.bashrcd/aliases_functions
 source $HOME/.bashrcd/bashrc_exec
+source $HOME/.bashrcd/shrc_aliases_default
