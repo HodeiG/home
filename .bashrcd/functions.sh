@@ -60,20 +60,28 @@ function _go_back {
 }
 # pwd and show how many directories back numbers
 function _pwd {
-    _PWD=$PWD
-    echo -e "${DGREEN}${_PWD}${NC}"
-    _PWD=$(echo "$_PWD" | sed 's/[^\/]/\ /g')
-    SC=$(echo "$_PWD" | fgrep -o / | wc -l) # Slash Count
-    ((SC--)) # Decrease by one because the last slash will be the 0 directory
-    while [[ "$SC" -ge "0" ]]; do
-        if [[ "$SC" -gt "9" ]]; then
-            _PWD=$(echo "$_PWD" | sed "s/[\/]\ /$SC/")
-        else
-            _PWD=$(echo "$_PWD" | sed "s/[\/]/$SC/")
-        fi
-        ((SC--))
-    done
-    echo "$_PWD"
+    _PWD=$(\pwd "$@")
+    EXIT=$?
+    # If token PS1 exists the command is run in the command line.
+    # Otherwise it is run interactively in an script.
+    if [ -n "$PS1" -a $EXIT == 0 ] ; then
+        echo -e "${DGREEN}${_PWD}${NC}"
+        _PWD=$(echo "$_PWD" | sed 's/[^\/]/\ /g')
+        SC=$(echo "$_PWD" | fgrep -o / | wc -l) # Slash Count
+        ((SC--)) # Decrease by one because the last slash will be the 0 directory
+        while [[ "$SC" -ge "0" ]]; do
+            if [[ "$SC" -gt "9" ]]; then
+                _PWD=$(echo "$_PWD" | sed "s/[\/]\ /$SC/")
+            else
+                _PWD=$(echo "$_PWD" | sed "s/[\/]/$SC/")
+            fi
+            ((SC--))
+        done
+    fi
+    if [ $EXIT == 0 ] ; then
+        echo "$_PWD"
+    fi
+    return $EXIT
 }
 
 function try {
