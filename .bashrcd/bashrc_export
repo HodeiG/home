@@ -26,9 +26,14 @@ __prompt_command() {
     local BGreen="\[\033[1;32m\]" # Green
     local BBlue="\[\033[1;34m\]"  # Blue
 
-    if [ $EXIT != 0 ]; then
+    if [ $EXIT != 0 ] ; then
         PS1+="${BRed}${EXIT}${ColorOff}|"      # Add red if exit code non 0
     fi
 
-    PS1+="${BGreen}\u@\h:${ColorOff}${BBlue}\w${ColorOff}$ "
+    PS1+="${BGreen}\u@$(date +%H:%M:%S):${ColorOff}${BBlue}\w${ColorOff}"
+    if [ $EUID == 0 ] ; then
+        PS1+="# "
+    else
+        PS1+="$ "
+    fi
 }
