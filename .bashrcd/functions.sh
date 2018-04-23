@@ -38,7 +38,7 @@ function _cl {
             EXIT=$?
         # $1 not a valid value
         else
-            echo "_cl: $1: No file or directory"
+            echo "_cl: $1: No such file or directory"
             EXIT=1
         fi
     fi
