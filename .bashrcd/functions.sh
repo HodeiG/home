@@ -1,7 +1,5 @@
 #! /bin/bash
 
-export GO=""
-GREEN='\e[0;0;32m'
 DGREEN='\e[0;1;32m'
 NC='\e[0m' #No color
 
