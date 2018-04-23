@@ -24,7 +24,7 @@ set nobackup
 
 set noswapfile
 
-set tags=tags; " CTAGS ISSUE (http://stackoverflow.com/questions/563616/vim-and-ctags-tips-and-tricks)
+"set tags=tags; " CTAGS ISSUE (http://stackoverflow.com/questions/563616/vim-and-ctags-tips-and-tricks)
 "
 " Open in new tab
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
@@ -148,11 +148,11 @@ vnoremap <c-f> "hy/<c-r>h
 " Plugin: python_fold
 " Description: Open and close folds.
 " Open recursively
-nnoremap <space><space> :call UnFoldRecursively()<CR>
+"nnoremap <space><space> :call UnFoldRecursively()<CR>
 " Open all
-nnoremap <space>a :call UnFoldAll()<CR>
+"nnoremap <space>a :call UnFoldAll()<CR>
 " One level
-nnoremap <space>1 :call UnFoldOneLevel()<CR>
+"nnoremap <space>1 :call UnFoldOneLevel()<CR>
 " Open recursively
 " nnoremap <space>r :call UnFoldRecursively()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
