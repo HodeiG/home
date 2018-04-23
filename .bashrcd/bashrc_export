@@ -30,10 +30,17 @@ __prompt_command() {
         PS1+="${BRed}${EXIT}${ColorOff}|"      # Add red if exit code non 0
     fi
 
-    PS1+="${BGreen}\u@$(date +%H:%M:%S):${ColorOff}${BBlue}\w${ColorOff}"
     if [ $EUID == 0 ] ; then
-        PS1+="# "
+        PS1+="${BRed}^${ColorOff}"
     else
-        PS1+="$ "
+        PS1+="${BGreen}[${ColorOff}"
+    fi
+
+    PS1+="\u@$(date +%H:%M:%S) \w"
+
+    if [ $EUID == 0 ] ; then
+        PS1+="${BRed}^${ColorOff}# "
+    else
+        PS1+="${BGreen}]${ColorOff}$ "
     fi
 }
