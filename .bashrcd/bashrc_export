@@ -22,9 +22,13 @@ __prompt_command() {
 
     local ColorOff="\[\033[0m\]" # Text Reset
 
-    local BRed="\[\033[1;31m\]"   # Red
-    local BGreen="\[\033[1;32m\]" # Green
-    local BBlue="\[\033[1;34m\]"  # Blue
+    local RGreen="\[\033[0;32m\]"   # Green - Regular
+    local RYellow="\[\033[0;33m\]"  # Yellow
+    local RBlue="\[\033[0;34m\]"    # Blue
+
+    local BRed="\[\033[1;31m\]"     # Red - Bold
+    local BGreen="\[\033[1;32m\]"   # Green
+    local BBlue="\[\033[1;34m\]"    # Blue
 
     if [ $EXIT != 0 ] ; then
         PS1+="${BRed}${EXIT}${ColorOff}|"      # Add red if exit code non 0
@@ -36,7 +40,12 @@ __prompt_command() {
         PS1+="${BGreen}[${ColorOff}"
     fi
 
-    PS1+="\u@$(date +%H:%M:%S) \w"
+    PS1+="$(date +%H:%M:%S) ${RGreen}\w${ColorOff}"
+
+    GIT_BRANCH=$(git branch 2>/dev/null | awk '/^*/ {print $2}')
+    if [ -n "$GIT_BRANCH" ] ; then
+        PS1+=" ${RYellow}(${GIT_BRANCH})${ColorOff}"
+    fi
 
     if [ $EUID == 0 ] ; then
         PS1+="${BRed}^${ColorOff}# "

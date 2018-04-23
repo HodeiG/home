@@ -17,27 +17,33 @@ function _choose_option {
 }
 # Change directory and ls
 function _cl {
+    EXIT=0
     if [[ "$1" == "" ]]
     then
         cd
+        EXIT=$?
     else
         # $1 is-a:
         #   - directory, or
         #   - "-" (go back to previous folder)
         if [ -d "$1" ] || [ "$1" == "-" ]; then
             cd "$1"
+            EXIT=$?
         # $1 is-a:
         #   - file
         elif [ -f "$1" ]; then
             DIRNAME=$(dirname $1)
             echo "$1 >>> ${DIRNAME}/"
             cd $DIRNAME
+            EXIT=$?
         # $1 not a valid value
         else
             echo "_cl: $1: No file or directory"
+            EXIT=1
         fi
     fi
     ls
+    return $EXIT
 }
 
 # Go back a number of folders
