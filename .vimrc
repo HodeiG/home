@@ -43,6 +43,8 @@ set relativenumber " Show the relative line number.
 
 set number " This option with the above will also show the current line number as well
 
+hi LineNr ctermfg=3 " dark yellow
+
 set ignorecase " Ignore case when searching
 
 set cpoptions+=ces$ " Add a dolar at the end of a string when editing it.
@@ -55,11 +57,15 @@ set infercase "When using completion in insert mode no ignorecase
 
 set synmaxcol=200 "When using long xml lines, it goes slow the highlighting. This way vim will go faster
 
-set listchars=eol:$,tab:>>,trail:- "http://stackoverflow.com/questions/903934/unable-to-make-gray-eol-character-by-vimrc
-hi NonText ctermfg=7 guifg=gray
-hi SpecialKey ctermfg=7 guifg=gray
-
+" http://stackoverflow.com/questions/903934/unable-to-make-gray-eol-character-by-vimrc
+" https://wincent.com/blog/making-vim-highlight-suspicious-characters
+" https://codeyarns.com/2011/07/29/vim-chart-of-color-names/
+set listchars=eol:$,tab:>>,trail:· 
+hi NonText ctermfg=magenta
+hi SpecialKey ctermfg=magenta
 set list
+"Use 'set nolist' to disable special chars
+"set nolist
 
 set incsearch
 
@@ -81,22 +87,11 @@ filetype plugin on
 ":so $HOME/.vim/source/automaticAutocomplete.vim
 " Source indentation
 :so $HOME/.vim/source/indentation.vim
-" Source escape
-" TODO
-" I could use the following command to check keyboard layout
-" and set different escape character
-" setxkbmap -query | grep layout
-if $USER == 'wome'
-    :so $HOME/.vim/source/escape_n.vim
-else
-    :so $HOME/.vim/source/escape_semicolon.vim
-endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Some global mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap , :
+" Quick scape
+inoremap ,, <C-c><right>
 " Jump to the last modified line and column
 nnoremap '. `.
 " http://stackoverflow.com/questions/235839/how-do-i-indent-multiple-lines-quickly-in-vi
@@ -145,16 +140,6 @@ vnoremap <c-f> "hy/<c-r>h
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: python_fold
-" Description: Open and close folds.
-" Open recursively
-"nnoremap <space><space> :call UnFoldRecursively()<CR>
-" Open all
-"nnoremap <space>a :call UnFoldAll()<CR>
-" One level
-"nnoremap <space>1 :call UnFoldOneLevel()<CR>
-" Open recursively
-" nnoremap <space>r :call UnFoldRecursively()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: NERTTree
 " Description: Opens a menu to look for files to open.
@@ -229,30 +214,7 @@ nnoremap t6 :call Find2({'find_opts': '. -type f -path', 'find_pattern': '<c-r>=
 nnoremap t7 :call Rcs_status()<CR>
 nnoremap tb :call Rcs_blame()<CR>
 nnoremap te :execute 'edit' expand('%:p:h')<cr>
-"nnoremap te :tab split+Ex<CR>
 
-
-"nnoremap tv :call Vimdiff()<CR>
-"nnoremap tm :exe ":!svn diff --diff-cmd=meld %"<CR>
-"nnoremap tl :exe ":!ln -sf $(readlink -f %) ~/src/fiddler2/"<CR>
-
-" ack functions
-"nnoremap t1 :python py_thread(ack,["-a -i",""])<left><left><left>
-"nnoremap t2 :python py_thread(ack_cursor,["-a -i"])<CR>
-"nnoremap t3 :python py_thread(ack_yvalue,["-a -i"])<CR>
-" find functions
-"nnoremap t4 :python py_thread(find,[""])<left><left><left>
-"nnoremap t5 :python py_thread(find_cursor)<CR>
-"nnoremap t6 :python py_thread(find_yvalue)<CR>
-" svn functions
-"nnoremap t7 :python py_thread(svn_status)<CR>
-"nnoremap tb :python py_thread(svn_blame)<CR>
-"nnoremap tm :python py_thread(svn_meld)<CR>
-"nnoremap tl :python py_thread(svn_log)<CR>
-"nnoremap  t0 :call Open()<CR>
-"nnoremap t0 <C-W>gF<CR>
-"nnoremap  <C-W>t0 <C-W>gF<CR>
-"nnoremap te :tab split+Ex<CR>
 "http://stackoverflow.com/questions/2414626/vim-unsaved-buffer-warning
 nnoremap <F5> :exe ":set hidden \| :Ex"<CR>
 
