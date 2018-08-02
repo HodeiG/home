@@ -43,7 +43,8 @@ set relativenumber " Show the relative line number.
 
 set number " This option with the above will also show the current line number as well
 
-hi LineNr ctermfg=3 " dark yellow
+" :h cterm-colors
+hi LineNr ctermfg=DarkYellow
 
 set ignorecase " Ignore case when searching
 
@@ -60,9 +61,10 @@ set synmaxcol=200 "When using long xml lines, it goes slow the highlighting. Thi
 " http://stackoverflow.com/questions/903934/unable-to-make-gray-eol-character-by-vimrc
 " https://wincent.com/blog/making-vim-highlight-suspicious-characters
 " https://codeyarns.com/2011/07/29/vim-chart-of-color-names/
-set listchars=eol:$,tab:>>,trail:· 
-hi NonText ctermfg=magenta
-hi SpecialKey ctermfg=magenta
+" :h cterm-colors
+set listchars=eol:$,tab:>>,trail:•
+hi NonText ctermfg=DarkYellow
+hi SpecialKey ctermfg=DarkYellow
 set list
 "Use 'set nolist' to disable special chars
 "set nolist
