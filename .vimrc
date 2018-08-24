@@ -233,6 +233,7 @@ nnoremap t5 :echo "Deprecated"<cr>
 "nnoremap t6 :call Find_yvalue()<CR
 nnoremap t6 :call Find2({'find_opts': '. -type f -path', 'find_pattern': '<c-r>=@"<cr>'})
 nnoremap t7 :call Rcs_status()<CR>
+nnoremap td :Gdiff<CR>
 nnoremap tb :Gblame<CR>
 nnoremap te :execute 'edit' expand('%:p:h')<cr>
 
