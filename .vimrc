@@ -87,6 +87,11 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Plugins
 Plugin 'airblade/vim-gitgutter'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'nvie/vim-flake8'
+Plugin 'scrooloose/nerdtree'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -173,31 +178,6 @@ vnoremap <c-f> "hy/<c-r>h
 " Description: Opens a menu to look for files to open.
 nnoremap <F2> :NERDTreeToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: TlistToggle
-" Description: Opens a menu which lists all the functions
-" and classes
-nnoremap <F3> :TlistToggle<CR>
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: Indent Guides
-" Web: http://www.vim.org/scripts/script.php?script_id=3361
-nnoremap <F4> :IndentGuidesToggle<CR>
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: Toggle paste without autoindent
-" - Start insert mode.
-" - Press F6 (toggles the 'paste' option on) or (:set paste)
-" - Use your terminal to paste text from the clipboard.
-" - Press F6 (toggles the 'paste' option off) or (:set nopaste)
-" set pastetoggle=F6
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: pydiction
-" Usage: In insert mode use TAB to complete a word.
-let g:pydiction_location = '~/.vim/dictionary/py-dict'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: pythoncomplete
-" Usage: <c-x><c-o>
-" Info: :h i_Ctrl-X
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" http://blog.motane.lu/2009/05/25/vim-and-python/
 
 " Keep cursor position when switching buffers
 if v:version >= 700
@@ -240,7 +220,7 @@ nnoremap t5 :echo "Deprecated"<cr>
 "nnoremap t6 :call Find_yvalue()<CR
 nnoremap t6 :call Find2({'find_opts': '. -type f -path', 'find_pattern': '<c-r>=@"<cr>'})
 nnoremap t7 :call Rcs_status()<CR>
-nnoremap tb :call Rcs_blame()<CR>
+nnoremap tb :Gblame<CR>
 nnoremap te :execute 'edit' expand('%:p:h')<cr>
 
 "http://stackoverflow.com/questions/2414626/vim-unsaved-buffer-warning
