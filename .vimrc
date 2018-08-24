@@ -86,15 +86,17 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Plugins
-Plugin 'airblade/vim-gitgutter'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'nvie/vim-flake8'
-Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'     " Load files <F2>
+Plugin 'airblade/vim-gitgutter'  " Shows git modified lines
+Plugin 'davidhalter/jedi-vim'    " Python auto-complete
+Plugin 'tpope/vim-fugitive'      " Git commands such as Gblame
+Plugin 'vim-syntastic/syntastic' " Python static analysis :w
+Plugin 'nvie/vim-flake8'         " Python static analysis <F7>
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -177,6 +179,17 @@ vnoremap <c-f> "hy/<c-r>h
 " Plugin: NERTTree
 " Description: Opens a menu to look for files to open.
 nnoremap <F2> :NERDTreeToggle<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin: syntastic
+" Description: Syntaxis checking plugin
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Keep cursor position when switching buffers
