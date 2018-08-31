@@ -1,10 +1,10 @@
 # Used "$HOME" instead of "~" because python doesn't use very well enviroment
 # variables with "~" character.
-export PATH="$HOME/.local/bin:$HOME/bin:$HOME/local/bin:/usr/sbin:/sbin:$PATH"
+export PATH="$HOME/.local/bin:/usr/sbin:/sbin:$PATH"
 export EDITOR=vim # svn uses this when doing new files/dirs commit
-export PYTHONPATH=$HOME/local/lib/python/site-packages:$HOME/local/lib/python2.7/site-packages:$PYTHONPATH
-export LD_LIBRARY_PATH=$HOME/local/lib/:$LD_LIBRARY_PATH
-export PKG_CONFIG_PATH=$HOME/local/lib/pkgconfig/:$PKG_CONFIG_PATH
+export PYTHONPATH=$HOME/.local/lib/python/site-packages:$HOME/local/lib/python2.7/site-packages:$PYTHONPATH
+export LD_LIBRARY_PATH=$HOME/.local/lib/:$LD_LIBRARY_PATH
+export PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig/:$PKG_CONFIG_PATH
 export PYTHONSTARTUP=~/.pythonstartup
 export BC_ENV_ARGS=~/.bcrc
 
