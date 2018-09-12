@@ -35,6 +35,10 @@ __prompt_command() {
         PS1+="${BRed}${EXIT}${ColorOff}|"      # Add red if exit code non 0
     fi
 
+    if [ -n "$VIRTUAL_ENV" ] ; then
+        PS1+="(venv)|"
+    fi
+
     if [ $EUID == 0 ] ; then
         PS1+="${BRed}^${ColorOff}"
     else
