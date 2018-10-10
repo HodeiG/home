@@ -72,8 +72,7 @@ function _pwd {
         echo -e "${DGREEN}${_PWD}${NC}"
         _PWD=$(echo "$_PWD" | sed 's/[^\/]/\ /g')
         SC=$(echo "$_PWD" | fgrep -o / | wc -l) # Slash Count
-        ((SC--)) # Decrease by one because the last slash will be the 0 directory
-        while [[ "$SC" -ge "0" ]]; do
+        while [[ "$SC" -gt "0" ]]; do
             if [[ "$SC" -gt "9" ]]; then
                 _PWD=$(echo "$_PWD" | sed "s/[\/]\ /$SC/")
             else
