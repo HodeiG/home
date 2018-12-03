@@ -1,8 +1,20 @@
-# Apparently .Xdefaults is deprecated and hence using .Xresources
-# In order to test configuration use the below command:
-# xrdb ~/.Xresources
-
+! https://invisible-island.net/scripts/sample-output/vh-man2html-xterm.html
+! Use 'xrdb ~/.Xresources' to test configuration (.Xdefaults deprecated).
+!
+! Specifies the color to use for the background of the window.
 XTerm*background:black
+! Specifies the color to use for displaying text in the window.
 XTerm*foreground:white
+! Tells xterm whether to use the PRIMARY or CLIPBOARD for SELECT tokens in the
+! selection mechanism. The set-select action can change this at runtime,
+! allowing the user to work with programs that handle only one of these
+! mechanisms. The default is 'false', which tells it to use PRIMARY.
 XTerm*selectToClipboard:True
+! Specifies whether to make the cursor blink. The default is 'false'.
 XTerm*cursorBlink:True
+! Specifies the duration of the ``on'' part of the cursor blink cycle-time, in
+! milliseconds. The same timer is used for text blinking. The default is 600.
+XTerm*cursorOnTime:1400
+! Specifies the duration of the ``off'' part of the cursor blink cycle-time in
+! milliseconds. The same timer is used for text blinking. The default is 300.
+XTerm*cursorOffTime:600
