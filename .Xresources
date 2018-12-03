@@ -1,3 +1,8 @@
+# Apparently .Xdefaults is deprecated and hence using .Xresources
+# In order to test configuration use the below command:
+# xrdb ~/.Xresources
+
 XTerm*background:black
 XTerm*foreground:white
-XTerm*selectToClipboard: true
+XTerm*selectToClipboard:True
+XTerm*cursorBlink:True
