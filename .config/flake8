@@ -1,0 +1,3 @@
+[flake8]
+# Avoid error F831 undefined name '_' for gettext function _()
+builtins = _

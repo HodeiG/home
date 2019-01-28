@@ -2,8 +2,13 @@
 
 ### Installation
 
-The best recommended way to install these files is to download the ZIP file and
-copy the content to the $HOME directory.
+As this git project uses Git submodules, clone project using this command:
+```sh
+git clone --recurse-submodules git@github.com:HodeiG/home.git
+```
+
+Once the project has been cloned, create a software link to the files that want
+to be used.
 
 Finally, modify your .bashrc and append the following line at the end of file.
 
@@ -35,7 +40,8 @@ Test configuration.
 ssh -vT git@github.com
 ```
 
-Before committing any changes, make sure that the remote repository is set correctly.
+Before committing any changes, make sure that the remote repository is
+configured correctly.
 
 ```sh
 git remote set-url origin git@github.com:HodeiG/home.git

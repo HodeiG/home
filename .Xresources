@@ -18,3 +18,6 @@ XTerm*cursorOnTime:1400
 ! Specifies the duration of the ``off'' part of the cursor blink cycle-time in
 ! milliseconds. The same timer is used for text blinking. The default is 300.
 XTerm*cursorOffTime:600
+! Specifies whether or not the scrollbar should be displayed. The default is
+! ``false.''
+XTerm*scrollBar:False
