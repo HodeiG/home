@@ -88,10 +88,15 @@ function _pwd {
 }
 
 function try {
+    if [ -z "$TIMEOUT" ] ; then
+        TIMEOUT=2
+    fi
+    ATTEMPT=0
     until eval "$@"
     do
-        echo "Trying again in 2 seconds..."
-        sleep 2
+        ((ATTEMPT++))
+        echo "[Attempt $ATTEMPT] Trying again in $TIMEOUT seconds..."
+        sleep $TIMEOUT
     done
 }
 
