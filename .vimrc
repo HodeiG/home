@@ -207,11 +207,15 @@ endif
 " tc) explanation
 " Move to the previous buffer and then 'buffeer delete alternate file'
 " http://stackoverflow.com/questions/4465095/vim-delete-buffer-without-losing-the-split-window
+"
+" Source buffer utils
+:so $HOME/.vim/source/buffer_utils.vim
 nnoremap tw :w<cr>
 nnoremap tq :bd<cr>
 nnoremap tc :bd!<cr>
 nnoremap tt :buffer#<cr>
-nnoremap tl :ls<cr>:b<left>
+" buffer_utils: List buffers sorted by name
+nnoremap tl :Ls<cr>:b<left>
 nnoremap tn :bnext<cr>
 nnoremap tp :bprevious<cr>
 nnoremap to <c-w>f 
