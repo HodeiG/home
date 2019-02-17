@@ -76,6 +76,10 @@ set hidden " Unable to undo after changing between buffers
 "filetype on "Set automatic filetype detection to on
 filetype off                  " required
 
+" Set colorcolumn to 80 characters
+set colorcolumn=80
+set textwidth=80
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
