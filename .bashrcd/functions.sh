@@ -11,34 +11,40 @@ function _choose_option {
         CMD="${CMD} \"$var\" \"\""
         ((INDEX++))
     done
-    eval $CMD 3>&1 1>&2 2>&3
+    eval "$CMD 3>&1 1>&2 2>&3"
 }
+
 # Change directory and ls
 function _cl {
     EXIT=0
     if [[ "$1" == "" ]]
     then
-        cd
+        eval "cd"
         EXIT=$?
     else
         # $1 is-a:
         #   - directory, or
         #   - "-" (go back to previous folder)
         if [ -d "$1" ] || [ "$1" == "-" ]; then
-            cd "$1"
+            eval "cd $1"
             EXIT=$?
         # $1 is-a:
         #   - file
         elif [ -f "$1" ]; then
-            DIRNAME=$(dirname $1)
+            DIRNAME=$(dirname "$1")
             echo "$1 >>> ${DIRNAME}/"
-            cd $DIRNAME
+            eval "cd $DIRNAME"
             EXIT=$?
         # $1 not a valid value
         else
             echo "_cl: $1: No such file or directory"
             EXIT=1
         fi
+    fi
+    if [ -f .env.sh ] ; then
+        echo -e "$DGREEN############### Loading .env.sh$NC"
+        # shellcheck disable=SC1091
+        source .env.sh
     fi
     ls
     return $EXIT
@@ -54,14 +60,15 @@ function _go_back {
             echo "error: Not a valid number" >&2; return 1
         fi
         if [[ "$1" -gt "0" ]] ; then
-            CD=$(eval printf '../%.0s' {1..$1})
-            echo $CD
+            CD=$(eval "printf '../%.0s' {1..$1}")
+            echo "$CD"
             OLDPWD=pwd
-            eval cd $CD
-            echo $OLDPWD " >>> " $PWD
+            eval "cd $CD"
+            echo "$OLDPWD >>> $PWD"
         fi
     fi
 }
+
 # pwd and show how many directories back numbers
 function _pwd {
     _PWD=$(\pwd "$@")
