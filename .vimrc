@@ -127,6 +127,14 @@ filetype plugin indent on    " required
 ":so $HOME/.vim/source/automaticAutocomplete.vim
 " Source indentation
 :so $HOME/.vim/source/indentation.vim
+au BufNewFile,BufRead *.py set
+    \ tabstop=4
+    \ softtabstop=4
+    \ shiftwidth=4
+    \ textwidth=79
+    \ expandtab
+    \ autoindent
+    \ fileformat=unix
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Some global mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
