@@ -78,7 +78,7 @@ filetype off                  " required
 
 " Set colorcolumn to 80 characters
 set colorcolumn=80
-set textwidth=80
+set textwidth=79
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -235,6 +235,7 @@ nnoremap to <c-w>f
 
 " Create global variable for find_pattern, so we don't have to specify it every time
 let g:find_pattern='*'
+autocmd BufNewFile,BufRead *.py let g:find_pattern='*.py'
 
 "nnoremap t1 :call Ack("-Hn","")<left><left>
 "nnoremap t0 :exe 'normal "ayiw' \| echo <c-r>=@a<cr>
