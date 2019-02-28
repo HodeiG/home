@@ -166,6 +166,9 @@ bindsym $mod+Shift+m exec --no-startup-id ~/.config/i3/scripts/monitors.sh
 
 exec --no-startup-id pulseaudio
 
+# Configure the monitors during i3 initialization
+exec --no-startup-id ~/.config/i3/scripts/monitors.sh RIGHT
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -197,3 +200,7 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+# Change app bar colour
+# https://i3wm.org/docs/userguide.html#_changing_colors
+# <colorclass> <border> <background> <text> <indicator> <child_border>
+client.focused #859900 #859900 #fdf6e3 #859900
