@@ -17,7 +17,8 @@ fi
 # Force calendar start on Monday rather that on Sunday
 # -b: Use oldstyle format for ncal output
 # -M: Weeks start on Monday
-alias cal='ncal -b -M'
+# -3 Display the previous, current and next month surrounding today.
+alias cal='ncal -b -M -3'
 alias 7zc='7z a'
 alias 7zx='7z x'
 alias vi='vim'
