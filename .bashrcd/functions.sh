@@ -42,7 +42,6 @@ function _cl {
         fi
     fi
     if [ -f .env.sh ] ; then
-        echo -e "$DGREEN############### Loading .env.sh$NC"
         # shellcheck disable=SC1091
         source .env.sh
     fi
