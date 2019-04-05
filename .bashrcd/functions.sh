@@ -26,14 +26,14 @@ function _cl {
         #   - directory, or
         #   - "-" (go back to previous folder)
         if [ -d "$1" ] || [ "$1" == "-" ]; then
-            eval "\cd $1"
+            eval "\cd '$1'"
             EXIT=$?
         # $1 is-a:
         #   - file
         elif [ -f "$1" ]; then
             DIRNAME=$(dirname "$1")
             echo "$1 >>> ${DIRNAME}/"
-            eval "\cd $DIRNAME"
+            eval "\cd '$DIRNAME'"
             EXIT=$?
         # $1 not a valid value
         else
