@@ -97,6 +97,7 @@ Plugin 'davidhalter/jedi-vim'     " Python auto-complete
 Plugin 'tpope/vim-fugitive'       " Git commands such as Gblame
 Plugin 'vim-syntastic/syntastic'  " Python static analysis :w
 Plugin 'nvie/vim-flake8'          " Python static analysis <F7>
+Plugin 'wincent/command-t'        " Fas file navigation.
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -259,6 +260,7 @@ nnoremap t7 :call Rcs_status()<CR>
 nnoremap td :Gdiff<CR>
 nnoremap tb :Gblame<CR>
 nnoremap te :execute 'edit' expand('%:p:h')<cr>
+nnoremap ts :CommandT<CR>
 
 "http://stackoverflow.com/questions/2414626/vim-unsaved-buffer-warning
 nnoremap <F5> :exe ":set hidden \| :Ex"<CR>
