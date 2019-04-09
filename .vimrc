@@ -58,6 +58,8 @@ set infercase "When using completion in insert mode no ignorecase
 
 set synmaxcol=200 "When using long xml lines, it goes slow the highlighting. This way vim will go faster
 
+set wildignore=*.pyc " Ignore pyc files for command-t
+
 " http://stackoverflow.com/questions/903934/unable-to-make-gray-eol-character-by-vimrc
 " https://wincent.com/blog/making-vim-highlight-suspicious-characters
 " https://codeyarns.com/2011/07/29/vim-chart-of-color-names/
