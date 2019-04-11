@@ -239,6 +239,10 @@ nnoremap tj :CommandTJump<CR>
 nnoremap tn :bnext<cr>
 nnoremap tp :bprevious<cr>
 nnoremap to <c-w>f
+" By default CommandT uses the PmenuSel color group.
+" Hence modifying that group to change color. However it would be better if I
+" could create a new color group and configure g:CommandTCursorColor
+:hi PmenuSel ctermfg=White ctermbg=Blue cterm=Bold guifg=White guibg=DarkBlue gui=Bold
 if &term =~ "xterm" || &term =~ "screen"
     let g:CommandTCancelMap = ['<ESC>', '<C-c>']
 endif
