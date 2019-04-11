@@ -232,10 +232,16 @@ nnoremap tq :bd<cr>
 nnoremap tc :bd!<cr>
 nnoremap tt :buffer#<cr>
 " buffer_utils: List buffers sorted by name
-nnoremap tl :Ls<cr>:b<left>
+" nnoremap tl :Ls<cr>:b<left>
+nnoremap ts :CommandT<CR>
+nnoremap tl :CommandTBuffer<CR>
+nnoremap tj :CommandTJump<CR>
 nnoremap tn :bnext<cr>
 nnoremap tp :bprevious<cr>
-nnoremap to <c-w>f 
+nnoremap to <c-w>f
+if &term =~ "xterm" || &term =~ "screen"
+    let g:CommandTCancelMap = ['<ESC>', '<C-c>']
+endif
 "Use gf to open the file under curson into a new buffer
 
 " Create global variable for find_pattern, so we don't have to specify it every time
@@ -264,7 +270,6 @@ nnoremap t7 :call Rcs_status()<CR>
 nnoremap td :Gdiff<CR>
 nnoremap tb :Gblame<CR>
 nnoremap te :execute 'edit' expand('%:p:h')<cr>
-nnoremap ts :CommandT<CR>
 
 "http://stackoverflow.com/questions/2414626/vim-unsaved-buffer-warning
 nnoremap <F5> :exe ":set hidden \| :Ex"<CR>
