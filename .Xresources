@@ -21,3 +21,5 @@ XTerm*cursorOffTime:600
 ! Specifies whether or not the scrollbar should be displayed. The default is
 ! ``false.''
 XTerm*scrollBar:False
+XTerm*faceName: Monospace
+XTerm*faceSize: 11

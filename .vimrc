@@ -68,6 +68,7 @@ set listchars=eol:$,tab:>>,trail:•
 hi NonText ctermfg=DarkYellow
 hi SpecialKey ctermfg=DarkYellow
 set list
+
 "Use 'set nolist' to disable special chars
 "set nolist
 
@@ -81,6 +82,9 @@ filetype off                  " required
 " Set colorcolumn to 80 characters
 set colorcolumn=80
 set textwidth=79
+
+" Disable beep
+set visualbell
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
