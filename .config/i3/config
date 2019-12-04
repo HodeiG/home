@@ -151,7 +151,7 @@ exec --no-startup-id xbacklight -set 50
 
 # Wallpaper: https://wallpaper-house.com/group/debian-wallpapers/index.php
 # exec --no-startup-id feh --randomize --bg-fill ~/.config/i3/wallpapers/*
-exec --no-startup-id feh --bg-fill ~/.config/i3/wallpapers/gothic.jpg
+exec --no-startup-id feh --bg-fill ~/.config/i3/wallpapers/black.jpg
 # Launch screen shot manager (the bindkey is 'Print')
 bindcode $mod+Shift+107 exec gnome-screenshot -i
 # Launch firefox
