@@ -32,7 +32,8 @@ Commands: \n \
     \t get key \n \
     \t delete key [time] \n \
     \t stats \n \
-    \t list_all_keys"
+    \t list \n \
+    \t purge"
     echo -e "$format_usage"
 }
 mc_help() { mc_usage;}
@@ -41,22 +42,11 @@ mc_sendmsg() { echo -e "$*\r" | nc "$MCSERVER" "$MCPORT" -q 1;}
 
 mc_stats() { mc_sendmsg "stats";}
 
-mc_get_last_items_id() {
-    LastID=$(mc_sendmsg "stats items"|tail -n 2|head -n 1|awk -F':' '{print $2}')
-    echo "$LastID"
-}
-
-mc_list_all_keys() {
-    :>"/dev/shm/mc_all_keys_${MCSERVER}_${MCPORT}.txt"
-    max_item_num=$(mc_get_last_items_id)
-    if [ ! -z "$max_item_num" ] ; then
-        for i in $(seq 1 "$max_item_num")
-          do
-            mc_sendmsg "stats cachedump $i 0" | awk '{print $2}'
-        done >>"/dev/shm/mc_all_keys_${MCSERVER}_${MCPORT}.txt"
-        sed -i '/^$/d' "/dev/shm/mc_all_keys_${MCSERVER}_${MCPORT}.txt"
-        cat "/dev/shm/mc_all_keys_${MCSERVER}_${MCPORT}.txt"
-    fi
+mc_list() {
+    slabs=$(mc_sendmsg "stats items" | awk -F':' '/number/{print $2}')
+    for slab in $slabs ; do
+        mc_sendmsg "stats cachedump $slab 0" | awk '{print $2}'
+    done
 }
 
 mc_get() { mc_sendmsg "get $1" | awk "/^VALUE $1/{a=1;next}/^END/{a=0}a" ;}
@@ -91,41 +81,32 @@ mc_delete() { mc_sendmsg delete "$*";}
 mc_incr() { mc_sendmsg incr "$*";}
 mc_decr() { mc_sendmsg decr "$*";}
 
-mc_superpurge() {
-    mc_list_all_keys > /dev/null
-    grep "$1" "/dev/shm/mc_all_keys_${MCSERVER}_${MCPORT}.txt" > \
-        "/dev/shm/temp.swap.${MCSERVER}_${MCPORT}.txt"
-    while read keys
-    do
-        mc_sendmsg "delete ${keys}"
-    done <"/dev/shm/temp.swap.${MCSERVER}_${MCPORT}.txt"
-
-    rm -rf "/dev/shm/temp.swap.${MCSERVER}_${MCPORT}.txt"
+mc_purge() {
+    for key in $(mc_list | grep "$1") ; do
+        mc_sendmsg "delete ${key}"
+    done
 }
 
-if [ "$(basename "$0" .sh)" = "membash" ]
-then
-    MCSERVER="localhost"
-    MCPORT=11211
-    while getopts "h:p:" flag
-    do
-        case $flag in
-            h)
-                MCSERVER=${OPTARG:="localhost"}
-                ;;
-            p)
-                MCPORT=${OPTARG:="11211"}
-                ;;
-            \?)
-                echo "Invalid option: $OPTARG" >&2
-                ;;
-        esac
-    done
-    command="$1"
-    # Check if the given command exists
-    if ! type "mc_$command" &> /dev/null ; then
-        command="usage"
-    fi
-    mc_$command "${@:2}"
-    exit $?
+MCSERVER="localhost"
+MCPORT=11211
+while getopts "h:p:" flag
+do
+    case $flag in
+        h)
+            MCSERVER=${OPTARG:="localhost"}
+            ;;
+        p)
+            MCPORT=${OPTARG:="11211"}
+            ;;
+        \?)
+            echo "Invalid option: $OPTARG" >&2
+            ;;
+    esac
+done
+command="$1"
+# Check if the given command exists
+if ! type "mc_$command" &> /dev/null ; then
+    command="usage"
 fi
+mc_$command "${@:2}"
+exit $?
