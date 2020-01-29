@@ -86,6 +86,8 @@ alias gitmeld_cached='git difftool -y --dir-diff --cached --tool meld'
 # It is important to use the semicolon between the both commands and after the
 # SKIP variable has been set, it will persist as long as the same bash is used.
 alias gitmeld_commit='git log -n 1 --skip ${SKIP:-0} | grep -Po "(?<=commit )(.*)" | xargs -I{} git difftool --dir-diff {}~ {} --tool meld -y'
+# https://stackoverflow.com/a/15659938
+alias gitmeld_stash='git difftool -y --dir-diff --tool meld stash@{0}^!'
 alias gitsst_files_no_cached='git diff --relative --name-only'
 alias gitsst_files_cached='git diff --cached --relative --name-only'
 alias gitsst_files_commit='git show --relative --name-only --pretty="format:"'
