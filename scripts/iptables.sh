@@ -24,10 +24,31 @@ iptables -P FORWARD ACCEPT  ## Allow forwarding for Docker
 iptables -A INPUT -i lo -j ACCEPT
 iptables -A OUTPUT -o lo -j ACCEPT
 iptables -A FORWARD -o lo -j ACCEPT
+
+## DOCKER ##
 # Allow any connections in docker0
 iptables -A INPUT -i docker0 -j ACCEPT
 iptables -A OUTPUT -o docker0 -j ACCEPT
 iptables -A FORWARD -o docker0 -j ACCEPT
+
+# For docker-compose the iptables rules are set up differently by docker. Due
+# to this, specific ip ranges need to be allowed by each network. In order to
+# expose a service, in the  docker-compose YML file one of the below networks
+# or a new one needs to be specified. If a new docker network gets created the
+# iptables rules will have to be updated as well.
+# See:
+# https://runnable.com/docker/basic-docker-networking
+# https://runnable.com/docker/docker-compose-networking
+
+# Custom docker network bridge rules
+# Enable redmine (docker network inspect redmine | grep Subnet)
+iptables -A INPUT -s 172.21.0.0/16 -j ACCEPT
+iptables -A OUTPUT -d 172.21.0.0/16 -j ACCEPT
+
+# Enable deluge (docker network inspect deluge | grep Subnet)
+iptables -A INPUT -s 172.22.0.0/16 -j ACCEPT
+iptables -A OUTPUT -d 172.22.0.0/16 -j ACCEPT
+
 
 echo "Setting up rules."
 # Allow ICMP (outbound) connection
