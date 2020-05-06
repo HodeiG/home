@@ -8,8 +8,11 @@
 # https://wiki.archlinux.org/index.php/xrandr 
 
 
-connected_outputs=$(xrandr | grep " connected" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
-active_output=$(xrandr | grep -E " connected (primary )?[1-9]+" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
+connected_outputs=$(xrandr | grep " connected" | awk '{print $1}')
+# Active outputs will show "connected" but also the geometry of the monitor
+# Non active outputs will show "connected" but the geometry of the monitor is
+# hidden.
+active_output=$(xrandr | grep -E " connected (primary )?[1-9]+" | awk '{print $1}')
 
 monitor_mode=$1
 secondary_monitor_output=
@@ -27,7 +30,13 @@ if [ -z "$monitor_mode" ] ; then
         secondary_monitor_position="--right-of"
     fi
 else
-    if [ "$monitor_mode" == "MAIN" ] ; then
+    if [ "$monitor_mode" == "LIST" ] ; then
+        echo -e "Connected outputs\n================="
+        echo "$connected_outputs"
+        echo -e "Active outputs\n================="
+        echo "$active_output" | awk '{print $1}'
+        exit 0
+    elif [ "$monitor_mode" == "MAIN" ] ; then
         # Enable only main monitor
         secondary_monitor_output="--off"
         secondary_monitor_position=""
@@ -43,6 +52,18 @@ else
         # Enable multiple monitors cloned
         secondary_monitor_output="--auto"
         secondary_monitor_position="--same-as"
+    elif [ "$monitor_mode" == "RIGHT-ATTACH" ] ; then
+        # Enable given list of monitors set up on the right
+        secondary_monitor_output="--auto"
+        secondary_monitor_position="--right-of"
+        shift
+        connected_outputs="$@"
+    elif [ "$monitor_mode" == "LEFT-ATTACH" ] ; then
+        # Enable given list of monitors set up on the left
+        secondary_monitor_output="--auto"
+        secondary_monitor_position="--left-of"
+        shift
+        connected_outputs="$@"
     fi
 fi
 # Execute xrandr commands to configure displays
