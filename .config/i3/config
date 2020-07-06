@@ -163,7 +163,7 @@ bindsym $mod+Shift+s exec "i3-nagbar -t warning -m 'You pressed the shutdown sho
 # Launch sublime text editor
 bindsym $mod+Shift+t exec /usr/bin/subl
 # 
-bindsym $mod+Shift+m exec --no-startup-id ~/.config/i3/scripts/monitors.sh
+bindsym $mod+Shift+m exec --no-startup-id ~/.config/i3/scripts/monitors.sh LEFT-ATTACH eDP1 DP2-1 DP2-2
 
 exec --no-startup-id pulseaudio
 

@@ -89,6 +89,9 @@ iptables -A OUTPUT -m state --state NEW,ESTABLISHED,RELATED -p udp --dport 4500 
 # Allow PROXY 8080 TCP (outbound) connections
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -p tcp --sport 8080 -j ACCEPT
 iptables -A OUTPUT -m state --state NEW,ESTABLISHED,RELATED -p tcp --dport 8080 -j ACCEPT
+# Allow PROXY 8112 TCP (outbound) connections
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -p tcp --sport 8112 -j ACCEPT
+iptables -A OUTPUT -m state --state NEW,ESTABLISHED,RELATED -p tcp --dport 8112 -j ACCEPT
 # Allow GIT TCP (outbound) connections
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -p tcp --sport 9418 -j ACCEPT
 iptables -A OUTPUT -m state --state NEW,ESTABLISHED,RELATED -p tcp --dport 9418  -j ACCEPT
