@@ -15,7 +15,7 @@ iptables -P OUTPUT ACCEPT
 iptables -P FORWARD ACCEPT
 
 echo "Default policy DROP any package except for localhost and docker0"
-# Default policy DROP any package except forwaring (needed for Docker)
+# Default policy DROP any package except forwarding (needed for Docker)
 iptables -P INPUT DROP
 iptables -P OUTPUT DROP
 iptables -P FORWARD ACCEPT  ## Allow forwarding for Docker
@@ -30,6 +30,29 @@ iptables -A FORWARD -o lo -j ACCEPT
 iptables -A INPUT -i docker0 -j ACCEPT
 iptables -A OUTPUT -o docker0 -j ACCEPT
 iptables -A FORWARD -o docker0 -j ACCEPT
+
+# Allow any connections in virbr0 (qemu)
+iptables -A INPUT -i virbr0 -j ACCEPT
+iptables -A OUTPUT -o virbr0 -j ACCEPT
+iptables -A FORWARD -o virbr0 -j ACCEPT
+
+# Allow any connections in virbr0-nic (qemu)
+iptables -A INPUT -i virbr0-nic -j ACCEPT
+iptables -A OUTPUT -o virbr0-nic -j ACCEPT
+iptables -A FORWARD -o virbr0-nic -j ACCEPT
+
+# Allow any connections in virbr1 (qemu)
+iptables -A INPUT -i virbr1 -j ACCEPT
+iptables -A OUTPUT -o virbr1 -j ACCEPT
+iptables -A FORWARD -o virbr1 -j ACCEPT
+
+# Allow any connections in virbr1-nic (qemu)
+iptables -A INPUT -i virbr1-nic -j ACCEPT
+iptables -A OUTPUT -o virbr1-nic -j ACCEPT
+iptables -A FORWARD -o virbr1-nic -j ACCEPT
+
+# Allow masquerade so NAT works for QEMU
+iptables -t nat -A POSTROUTING -o wlp1s0 -j MASQUERADE
 
 # For docker-compose the iptables rules are set up differently by docker. Due
 # to this, specific ip ranges need to be allowed by each network. In order to
