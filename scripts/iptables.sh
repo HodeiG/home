@@ -63,14 +63,30 @@ iptables -t nat -A POSTROUTING -o wlp1s0 -j MASQUERADE
 # https://runnable.com/docker/basic-docker-networking
 # https://runnable.com/docker/docker-compose-networking
 
-# Custom docker network bridge rules
-# Enable redmine (docker network inspect redmine | grep Subnet)
+# Custom docker network bridge rules. Use the below command to inspect network:
+# $ docker network inspect 'bridge' | grep Subnet
+
+# Allow connections in 'bridge'
+iptables -A INPUT -s 172.17.0.0/16 -j ACCEPT
+iptables -A OUTPUT -d 172.17.0.0/16 -j ACCEPT
+
+# Allow connections in 'adio-net-1'
+iptables -A INPUT -s 172.20.0.0/16 -j ACCEPT
+iptables -A OUTPUT -d 172.20.0.0/16 -j ACCEPT
+
+# Allow connections in 'adio-net-2'
+iptables -A INPUT -s 172.23.0.0/16 -j ACCEPT
+iptables -A OUTPUT -d 172.23.0.0/16 -j ACCEPT
+
+# Allow connections in 'redmine'
 iptables -A INPUT -s 172.21.0.0/16 -j ACCEPT
 iptables -A OUTPUT -d 172.21.0.0/16 -j ACCEPT
 
-# Enable deluge (docker network inspect deluge | grep Subnet)
+# Allow connections in 'deluge'
 iptables -A INPUT -s 172.22.0.0/16 -j ACCEPT
 iptables -A OUTPUT -d 172.22.0.0/16 -j ACCEPT
+
+
 
 
 echo "Setting up rules."
