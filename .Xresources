@@ -23,3 +23,5 @@ XTerm*cursorOffTime:600
 XTerm*scrollBar:False
 XTerm*faceName: Monospace
 XTerm*faceSize: 11
+! Make dark blue lighter.
+XTerm.VT100.color4: CornflowerBlue
