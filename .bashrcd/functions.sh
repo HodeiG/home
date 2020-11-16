@@ -70,11 +70,12 @@ function _go_back {
 
 # pwd and show how many directories back numbers
 function _pwd {
+    # shellcheck disable=SC1001
     _PWD=$(\pwd "$@")
     EXIT=$?
     # If token PS1 exists the command is run in the command line.
     # Otherwise it is run interactively in an script.
-    if [ -n "$PS1" -a $EXIT == 0 ] ; then
+    if [ -n "$PS1" ]  && [ $EXIT == 0 ] ; then
         echo -e "${DGREEN}${_PWD}${NC}"
         _PWD=$(echo "$_PWD" | sed 's/[^\/]/\ /g')
         SC=$(echo "$_PWD" | fgrep -o / | wc -l) # Slash Count
@@ -117,13 +118,23 @@ function _cdf {
         echo "Cannot find directory any directory."
         return 1
     elif [ "${FIND_AMOUNT}" -gt "1" ] ; then
-        XPATH=$(_choose_option $FIND)
+        XPATH=$(_choose_option "$FIND")
     else
         XPATH=$FIND
     fi
     if [ ! -z "$XPATH" ] ; then
         OLD_PWD=$PWD
-        _cl $XPATH
-        echo $OLD_PWD " >>> " $PWD
+        _cl "$XPATH"
+        echo "$OLD_PWD >>> $PWD"
     fi
+}
+
+function _gitmeld_commit {
+    if [ -z "$1" ] ; then
+        COMMITID=$(git log -n 1 | grep -Po "(?<=commit )(.*)")
+    else
+        COMMITID=$1
+    fi
+    git difftool --dir-diff "$COMMITID"~ "$COMMITID" --tool meld -y
+    echo "$COMMITID"
 }

@@ -80,12 +80,7 @@ alias gitsst_cached='git diff --cached --relative --name-status'
 alias gitsst_commit='git show --relative --name-only --pretty="format:"'
 alias gitmeld_no_cached='git difftool -y --dir-diff --tool meld'
 alias gitmeld_cached='git difftool -y --dir-diff --cached --tool meld'
-# gitmeld_commit accepts a global variable called SKIP which by default will be
-# set to 0. However it is possible to set it using the below way:
-# $ SKIP=2; gitmeld_commit
-# It is important to use the semicolon between the both commands and after the
-# SKIP variable has been set, it will persist as long as the same bash is used.
-alias gitmeld_commit='git log -n 1 --skip ${SKIP:-0} | grep -Po "(?<=commit )(.*)" | xargs -I{} git difftool --dir-diff {}~ {} --tool meld -y'
+alias gitmeld_commit='_gitmeld_commit'
 # https://stackoverflow.com/a/15659938
 alias gitmeld_stash='git difftool -y --dir-diff --tool meld stash@{0}^!'
 alias gitsst_files_no_cached='git diff --relative --name-only'
