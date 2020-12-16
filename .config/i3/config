@@ -135,7 +135,7 @@ exec --no-startup-id /usr/lib/notification-daemon/notification-daemon
 # setxkbmap -print -verbose 10
 exec --no-startup-id setxkbmap -layout gb
 # The keys to increase/decrease brightness don't work. Hence setting it manually.
-exec --no-startup-id xbacklight -set 50
+exec --no-startup-id xbacklight -set 20
 
 # https://i3wm.org/docs/userguide.html
 # A keyboard binding makes i3 execute a command (see below) upon pressing a
