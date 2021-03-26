@@ -8,6 +8,8 @@ CRYPT_REPO=$HOME/Dropbox/workspace
 LOCAL_EXISTED=false
 REMOTE_EXISTED=false
 
+command -v git-remote-gcrypt &>/dev/null || error "This script depends on \
+git-remote-gcrypt"
 test -n "$1" || error "Full path to the repository. If it doesn't exist will \
 be created"
 test -n "$2" || error "GPG key not provided. See 'gpg --list-keys'"
