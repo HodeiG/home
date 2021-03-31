@@ -99,10 +99,19 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'      " Load files <F2>
 Plugin 'scrooloose/nerdcommenter' " Comment out lines <leader>ci
 Plugin 'airblade/vim-gitgutter'   " Shows git modified lines
+" jedi-vim needs vim to be compiled against python3
+" The quickest way to get vim compiled with vim is to:
+" $ apt-get install vim-nox
 Plugin 'davidhalter/jedi-vim'     " Python auto-complete
 Plugin 'tpope/vim-fugitive'       " Git commands such as Gblame
 Plugin 'vim-syntastic/syntastic'  " Python static analysis :w
 Plugin 'nvie/vim-flake8'          " Python static analysis <F7>
+" Install instructions
+" https://github.com/wincent/command-t/blob/master/doc/command-t.txt
+" $ apt-get install ruby2.3-dev
+" $ cd ~/.vim/bundle/command-t/ruby/command-t/ext/command-t
+" $ ruby extconf.rb
+" $ make
 Plugin 'wincent/command-t'        " Fas file navigation.
 
 " All of your Plugins must be added before the following line

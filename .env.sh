@@ -8,7 +8,7 @@
 # do different things.
 
 VENV=".venv"
-GIT_BRANCH=$(git branch 2>/dev/null | awk '/^*/ {print $2}')
+GIT_BRANCH=$(git branch 2>/dev/null | awk '/^\*/ {print $2}')
 
 
 echo "> Executing .env.sh"
