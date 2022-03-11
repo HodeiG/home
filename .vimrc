@@ -220,7 +220,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 " let g:syntastic_python_checkers = ['prospector']
-let g:syntastic_python_checkers = ['python', 'flake8', 'pyflakes']
+let g:syntastic_python_checkers = ['python', 'flake8', 'pylint']
 " let g:syntastic_python_checkers = ['python', 'flake8', 'pyflakes', 'pylint']
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: nerdcomment
@@ -270,14 +270,14 @@ autocmd BufNewFile,BufRead *.py let g:find_pattern='*.py'
 "nnoremap t0 :exe 'normal "ayiw' \| echo <c-r>=@a<cr>
 "nnoremap  t0 :exe 'normal "ayiw' \| exe ":call Test({'find_opts': '. -type f -path', 'grep_opts': '-Hn', 'grep_pattern': '".@a"', 'find_pattern': '<c-r>=g:find_pattern<cr>'})"
 "nnoremap  t" :exe 'normal ""yiw' \| :exe 't0'
-nnoremap t1 :call Ack2({'find_opts': '. -type f -path', 'grep_opts': '-Hn', 'find_pattern': '<c-r>=g:find_pattern<cr>', 'grep_pattern': ''})<left><left><left>
+nnoremap t1 :call Ack2({'find_opts': '. -type f -path', 'grep_opts': '-IHn', 'find_pattern': '<c-r>=g:find_pattern<cr>', 'grep_pattern': ''})<left><left><left>
 "nnoremap t2 :call Ack_cursor("-Hn")<CR>
 "nnoremap t2 :call Ack_cursor2({'find_opts': '. -type f -path', 'grep_opts': '-Hn'})
 "nnoremap  t2 :exe 'normal "ayiw' \| exe ":call Ack2({'find_opts': '. -type f -path', 'grep_opts': '-Hn', 'grep_pattern': '".@a"', 'find_pattern': '<c-r>=g:find_pattern<cr>'})"
 nnoremap t2 :echo "Deprecated"<cr>
 "nnoremap t3 :call Ack_yvalue("-Hn")<CR>
 "nnoremap t3 :call Ack_yvalue2({'find_opts': '. -type f -path', 'grep_opts': '-Hn'})
-nnoremap t3 :call Ack2({'find_opts': '. -type f -path', 'grep_opts': '-Hn', 'find_pattern': '<c-r>=g:find_pattern<cr>', 'grep_pattern': '<c-r>=@"<cr>'})
+nnoremap t3 :call Ack2({'find_opts': '. -type f -path', 'grep_opts': '-IHn', 'find_pattern': '<c-r>=g:find_pattern<cr>', 'grep_pattern': '<c-r>=@"<cr>'})
 "nnoremap t4 :call Find("")<left><left>
 nnoremap t4 :call Find2({'find_opts': '. -type f -path', 'find_pattern': '*'})<left><left><left>
 "nnoremap t5 :call Find_cursor()<CR>
