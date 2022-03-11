@@ -106,6 +106,7 @@ Plugin 'davidhalter/jedi-vim'     " Python auto-complete
 Plugin 'tpope/vim-fugitive'       " Git commands such as Gblame
 Plugin 'vim-syntastic/syntastic'  " Python static analysis :w
 Plugin 'nvie/vim-flake8'          " Python static analysis <F7>
+Plugin 'rust-lang/rust.vim'       " Rust plugin
 " Install instructions
 " https://github.com/wincent/command-t/blob/master/doc/command-t.txt
 " $ apt-get install ruby2.3-dev
