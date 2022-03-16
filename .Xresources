@@ -25,3 +25,5 @@ XTerm*faceName: Monospace
 XTerm*faceSize: 11
 ! Make dark blue lighter.
 XTerm.VT100.color4: CornflowerBlue
+! Increase scroll back length
+XTerm.*saveLines: 100000
