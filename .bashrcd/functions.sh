@@ -131,10 +131,10 @@ function _cdf {
 
 function _gitmeld_commit {
     if [ -z "$1" ] ; then
-        COMMITID=$(git log -n 1 | grep -Po "(?<=commit )(.*)")
+        COMMITID=$(git log -n 1 | grep -Po "(?<=^commit )(.*)")
     else
         COMMITID=$1
     fi
-    git difftool --dir-diff "$COMMITID"~ "$COMMITID" --tool meld -y
+    git difftool --dir-diff $COMMITID~ $COMMITID --tool meld -y
     echo "$COMMITID"
 }

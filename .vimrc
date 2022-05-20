@@ -229,6 +229,8 @@ let g:syntastic_python_checkers = ['python', 'flake8', 'pylint']
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RUST related configurations
+let g:rustfmt_autosave = 1
 
 " Keep cursor position when switching buffers
 if v:version >= 700
