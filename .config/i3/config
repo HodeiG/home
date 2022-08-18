@@ -94,6 +94,18 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# Automatic back-and-forth when switching to the current workspace
+# https://i3wm.org/docs/userguide.html#workspace_auto_back_and_forth
+# You don't need to remember where you came from. Just press the same workspace
+# number and it will swith to the previous one. For instance if you are in
+# workspace 2, press $mod+2 and that will take you back to the previous work
+# space.
+workspace_auto_back_and_forth yes
+
+# Binding to move from the next/previous workspace using tabs
+bindsym Mod1+Tab workspace next
+bindsym Mod1+Shift+Tab workspace prev
+
 # switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
