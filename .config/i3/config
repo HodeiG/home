@@ -7,10 +7,9 @@
 
 # i3 config file (v4)
 #
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod1
-#set $sup Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -20,15 +19,34 @@ font pango:monospace 8
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
 
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
+# Start XDG autostart .desktop files using dex. See also
+# https://wiki.archlinux.org/index.php/XDG_Autostart
+exec --no-startup-id dex --autostart --environment i3
+
+# The combination of xss-lock, nm-applet and pactl is a popular choice, so
+# they are included here as an example. Modify as you see fit.
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+exec --no-startup-id nm-applet
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+
+# move tiling windows via drag & drop by left-clicking into the title bar,
+# or left-clicking anywhere into the window while holding the floating modifier.
+tiling_drag modifier titlebar
 
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
@@ -38,12 +56,12 @@ bindsym $mod+Return exec xterm
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-# bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+d exec --no-startup-id j4-dmenu-desktop
+bindsym $mod+d exec --no-startup-id dmenu_run
+# A more modern dmenu replacement is rofi:
+# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+# There also is i3-dmenu-desktop which only displays applications shipping a
+# .desktop file. It is a wrapper around dmenu, so you need that installed.
+# bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+h focus left
@@ -64,10 +82,10 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
-# bindsym $mod+Shift+Left move left
-# bindsym $mod+Shift+Down move down
-# bindsym $mod+Shift+Up move up
-# bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $mod+o split h
@@ -107,81 +125,49 @@ workspace_auto_back_and_forth yes
 bindsym Mod1+Tab workspace next
 bindsym Mod1+Shift+Tab workspace prev
 
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
-# Start nm-applet
-exec --no-startup-id /usr/bin/nm-applet
-# Start dropboxd
-exec --no-startup-id ~/.dropbox-dist/dropboxd
-# Start notification daemon (notify-osd)
-exec --no-startup-id /usr/lib/notification-daemon/notification-daemon
-# Set keyboard layout to GB (Even if /etc/default/keyboard is set correctly, it's not taking the right value unless it's set manually)
-# setxkbmap -print -verbose 10
-exec --no-startup-id setxkbmap -layout gb
-# The keys to increase/decrease brightness don't work. Hence setting it manually.
-exec --no-startup-id xbacklight -set 20
-
-# https://i3wm.org/docs/userguide.html
-# A keyboard binding makes i3 execute a command (see below) upon pressing a
-# specific key. i3 allows you to bind either on keycodes or on keysyms (you can
-# also mix your bindings, though i3 will not protect you from overlapping ones).
-#
-# A keysym (key symbol) is a description for a specific symbol, like "a" or "b",
-# but also more strange ones like "underscore" instead of "_". These are the ones
-# you use in Xmodmap to remap your keys. To get the current mapping of your keys,
-# use xmodmap -pke. To interactively enter a key and see what keysym it is configured
-# to, use xev.
-
-
-# Wallpaper: https://wallpaper-house.com/group/debian-wallpapers/index.php
-# exec --no-startup-id feh --randomize --bg-fill ~/.config/i3/wallpapers/*
-exec --no-startup-id feh --bg-fill ~/.config/i3/wallpapers/black.jpg
-# Launch screen shot manager (the bindkey is 'Print')
-bindcode $mod+Shift+107 exec gnome-screenshot -i
-# Launch firefox
-bindsym $mod+Shift+f exec firefox
-# Lock screen
-bindsym $mod+Shift+x exec i3lock -i ~/.config/i3/goku.png
-# Shutdown system
-bindsym $mod+Shift+s exec "i3-nagbar -t warning -m 'You pressed the shutdown shortcut. Do you really want to shutdown the system?' -b 'Yes, shutdown' '/sbin/shutdown -h now'"
-# Launch sublime text editor
-bindsym $mod+Shift+t exec /usr/bin/subl
-# 
-bindsym $mod+Shift+m exec --no-startup-id ~/.config/i3/scripts/monitors.sh LEFT-ATTACH eDP1 DP2-1 DP2-2
-
-exec --no-startup-id pulseaudio
-
-# Configure the monitors during i3 initialization
-exec --no-startup-id ~/.config/i3/scripts/monitors.sh RIGHT
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -202,9 +188,10 @@ mode "resize" {
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape
+        # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
 }
 
 bindsym $mod+r mode "resize"
@@ -214,11 +201,11 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+
 # Change app bar colour
 # https://i3wm.org/docs/userguide.html#_changing_colors
 # <colorclass> <border> <background> <text> <indicator> <child_border>
 client.focused #859900 #859900 #fdf6e3 #859900
 
 # https://faq.i3wm.org/question/2885/disable-titlebar-completely.1.html
-# new_window 1pixel
-font pango:DejaVu Sans Mono 0
+new_window 1pixel

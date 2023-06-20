@@ -14,7 +14,7 @@ function! ModInsertEnter(mode)
     " self.parent
     " /home/wome/.titan
     " Accepted chars: " ' . / [ ] 
-    set iskeyword+=34,39,46,47,91,93
+    " set iskeyword+=34,39,46,47,91,93
     " Change the statusline"
     if a:mode == 'i'
         hi statusline ctermbg=red ctermfg=white
@@ -26,7 +26,7 @@ function! ModInsertEnter(mode)
 endfunction
 
 function! ModInsertLeave()
-    set iskeyword-=34,39,46,47,91,93
+    " set iskeyword-=34,39,46,47,91,93
     hi statusline ctermbg=0 ctermfg=15 term=bold,reverse cterm=bold,reverse
 endfunction
 
