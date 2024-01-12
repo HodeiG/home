@@ -86,39 +86,38 @@ set textwidth=79
 " Disable beep
 set visualbell
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+call plug#begin()
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
 
 " Plugins
-Plugin 'scrooloose/nerdtree'      " Load files <F2>
-Plugin 'scrooloose/nerdcommenter' " Comment out lines <leader>ci
-Plugin 'airblade/vim-gitgutter'   " Shows git modified lines
+Plug 'scrooloose/nerdtree'      " Load files <F2>
+Plug 'scrooloose/nerdcommenter' " Comment out lines <leader>ci
+Plug 'airblade/vim-gitgutter'   " Shows git modified lines
 " jedi-vim needs vim to be compiled against python3
 " The quickest way to get vim compiled with vim is to:
 " $ apt-get install vim-nox
-Plugin 'davidhalter/jedi-vim'     " Python auto-complete
-Plugin 'tpope/vim-fugitive'       " Git commands such as Gblame
-Plugin 'vim-syntastic/syntastic'  " Python static analysis :w
-Plugin 'nvie/vim-flake8'          " Python static analysis <F7>
-Plugin 'rust-lang/rust.vim'       " Rust plugin
-Plugin 'nathangrigg/vim-beancount'   " Shows git modified lines
-Plugin 'psf/black'
+" Plugin 'davidhalter/jedi-vim'     " Python auto-complete
+Plug 'tpope/vim-fugitive'       " Git commands such as Gblame
+Plug 'vim-syntastic/syntastic'  " Python static analysis :w
+Plug 'nvie/vim-flake8'          " Python static analysis <F7>
+Plug 'rust-lang/rust.vim'       " Rust plugin
+Plug 'nathangrigg/vim-beancount'   " Shows git modified lines
+Plug 'psf/black'
 " Install instructions
 " https://github.com/wincent/command-t/blob/master/doc/command-t.txt
 " $ apt-get install ruby2.3-dev
 " $ cd ~/.vim/bundle/command-t/ruby/command-t/ext/command-t
 " $ ruby extconf.rb
 " $ make
-Plugin 'wincent/command-t'        " Fas file navigation.
+" Plugin 'wincent/command-t'        " Fas file navigation.
+" https://github.com/junegunn/fzf
+" https://github.com/junegunn/fzf.vim
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()            " required
+
 filetype plugin indent on    " required
 
 " To ignore plugin indent changes, instead use:
@@ -178,11 +177,10 @@ nmap 0w 0w*
 " http://vim.wikia.com/wiki/Search_for_visually_selected_text
 " Substitute using the word under the cursor, yanked values
 " deleted values and text written in insert-mode
-nnoremap <c-b>w :%s/<c-r><c-w>/<c-r><c-w>/gc<Left><Left><Left>
-nnoremap <c-b>y :%s/<c-r>0/<c-r>0/gc<Left><Left><Left>
-nnoremap <c-b>d :%s/<c-r>"/<c-r>"/gc<Left><Left><Left>
-nnoremap <c-b>i :%s/<c-r>./<c-r>./gc<Left><Left><Left>
-vnoremap <c-b> "hy:%s/<c-r>h/<c-r>h/gc<Left><Left><Left>
+nnoremap <c-s>w :%s/<c-r><c-w>/<c-r><c-w>/gc<Left><Left><Left>
+nnoremap <c-s>y :%s/<c-r>0/<c-r>0/gc<Left><Left><Left>
+nnoremap <c-s>d :%s/<c-r>"/<c-r>"/gc<Left><Left><Left>
+nnoremap <c-s>i :%s/<c-r>./<c-r>./gc<Left><Left><Left>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Substitute methods
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -223,7 +221,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 " let g:syntastic_python_checkers = ['prospector']
-let g:syntastic_python_checkers = ['python', 'flake8', 'pylint']
+let g:syntastic_python_checkers = ['python', 'flake8']
 " let g:syntastic_python_checkers = ['python', 'flake8', 'pyflakes', 'pylint']
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: nerdcomment
@@ -252,7 +250,7 @@ nnoremap tc :bd!<cr>
 nnoremap tt :buffer#<cr>
 " buffer_utils: List buffers sorted by name
 " nnoremap tl :Ls<cr>:b<left>
-nnoremap ts :CommandT<CR>
+nnoremap ts :CommandTCommand<CR>
 nnoremap tl :CommandTBuffer<CR>
 nnoremap tj :CommandTJump<CR>
 nnoremap tn :bnext<cr>
