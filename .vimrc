@@ -118,6 +118,11 @@ Plug 'junegunn/fzf.vim'
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
+" Look for files under current directory
+nnoremap <c-p> :Files<CR>
+" List buffered files
+nnoremap <c-b> :Buffers<CR>
+
 filetype plugin indent on    " required
 
 " To ignore plugin indent changes, instead use:
