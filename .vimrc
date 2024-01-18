@@ -103,13 +103,6 @@ Plug 'nvie/vim-flake8'          " Python static analysis <F7>
 Plug 'rust-lang/rust.vim'       " Rust plugin
 Plug 'nathangrigg/vim-beancount'   " Shows git modified lines
 Plug 'psf/black'
-" Install instructions
-" https://github.com/wincent/command-t/blob/master/doc/command-t.txt
-" $ apt-get install ruby2.3-dev
-" $ cd ~/.vim/bundle/command-t/ruby/command-t/ext/command-t
-" $ ruby extconf.rb
-" $ make
-" Plugin 'wincent/command-t'        " Fas file navigation.
 " https://github.com/junegunn/fzf
 " https://github.com/junegunn/fzf.vim
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -118,10 +111,12 @@ Plug 'junegunn/fzf.vim'
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
-" Look for files under current directory
-nnoremap <c-p> :Files<CR>
-" List buffered files
-nnoremap <c-b> :Buffers<CR>
+" Initialize configuration dictionary
+" See: https://github.com/junegunn/fzf/issues/238#issuecomment-104315812
+let $FZF_DEFAULT_OPTS = '--bind "ctrl-j:down,ctrl-k:up,' .
+    \ 'alt-j:preview-down,alt-k:preview-up,' .
+    \ 'ctrl-u:page-up,ctrl-d:page-down" ' .
+    \ '--layout reverse --border'
 
 filetype plugin indent on    " required
 
@@ -172,7 +167,8 @@ nnoremap <c-j> i<Enter><Esc>
 " vim search don't jump http://stackoverflow.com/questions/4256697/vim-search-and-highlight-but-do-not-jump
 nnoremap  * :keepjumps normal! mi*`i<CR>
 " go to the first word and select it
-nmap 0w 0w*
+" ^: jump to the first non-blank character of the line
+nmap 0w 0^*
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Search and replace methods
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -255,12 +251,32 @@ nnoremap tc :bd!<cr>
 nnoremap tt :buffer#<cr>
 " buffer_utils: List buffers sorted by name
 " nnoremap tl :Ls<cr>:b<left>
-nnoremap ts :CommandTCommand<CR>
-nnoremap tl :CommandTBuffer<CR>
-nnoremap tj :CommandTJump<CR>
+" FZF: Look for files under current directory
+nnoremap ts :Files<CR>
+" FZF: Find file in buffer
+nnoremap tl :Buffer<CR>
+" FZF: Command history
+nnoremap th :History:<CR>
+" FZF: Grep with ripgrep
+" The below shortcut is using the FZF original grep call:
+" @param1: The ripgrep command which uses '--' to find for a literal.
+"          '--' can be replaced for '-w' to search for a exact word.
+" @param2: The preview option
+"
+" As the user input must go 26 character to the left, an easy way to do it
+" is to open the Find Mode (<C-F>) to see all the commands, move 26 chars to
+" the left (26<Left>) and finally exit the Find Mode to go back to the Command
+" prompt (<C-c>). Unfortunately the Find Mode stays opened, but it is a nice
+" shortcut. See https://vi.stackexchange.com/a/21043
+nnoremap tg :call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case -- ", fzf#vim#with_preview())<C-F>26<Left><C-c>
 nnoremap tn :bnext<cr>
 nnoremap tp :bprevious<cr>
 nnoremap to <c-w>f
+nnoremap td :Gdiff<CR>
+nnoremap tb :Gblame<CR>
+nnoremap t7 :call Rcs_status()<CR>
+nnoremap te :execute 'edit' expand('%:p:h')<cr>
+
 " By default CommandT uses the PmenuSel color group.
 " Hence modifying that group to change color. However it would be better if I
 " could create a new color group and configure g:CommandTCursorColor
@@ -268,34 +284,13 @@ nnoremap to <c-w>f
 if &term =~ "xterm" || &term =~ "screen"
     let g:CommandTCancelMap = ['<ESC>', '<C-c>']
 endif
+
 "Use gf to open the file under curson into a new buffer
 
 " Create global variable for find_pattern, so we don't have to specify it every time
 let g:find_pattern='*'
 autocmd BufNewFile,BufRead *.py let g:find_pattern='*.py'
 
-"nnoremap t1 :call Ack("-Hn","")<left><left>
-"nnoremap t0 :exe 'normal "ayiw' \| echo <c-r>=@a<cr>
-"nnoremap  t0 :exe 'normal "ayiw' \| exe ":call Test({'find_opts': '. -type f -path', 'grep_opts': '-Hn', 'grep_pattern': '".@a"', 'find_pattern': '<c-r>=g:find_pattern<cr>'})"
-"nnoremap  t" :exe 'normal ""yiw' \| :exe 't0'
-nnoremap t1 :call Ack2({'find_opts': '. -type f -path', 'grep_opts': '-IHn', 'find_pattern': '<c-r>=g:find_pattern<cr>', 'grep_pattern': ''})<left><left><left>
-"nnoremap t2 :call Ack_cursor("-Hn")<CR>
-"nnoremap t2 :call Ack_cursor2({'find_opts': '. -type f -path', 'grep_opts': '-Hn'})
-"nnoremap  t2 :exe 'normal "ayiw' \| exe ":call Ack2({'find_opts': '. -type f -path', 'grep_opts': '-Hn', 'grep_pattern': '".@a"', 'find_pattern': '<c-r>=g:find_pattern<cr>'})"
-nnoremap t2 :echo "Deprecated"<cr>
-"nnoremap t3 :call Ack_yvalue("-Hn")<CR>
-"nnoremap t3 :call Ack_yvalue2({'find_opts': '. -type f -path', 'grep_opts': '-Hn'})
-nnoremap t3 :call Ack2({'find_opts': '. -type f -path', 'grep_opts': '-IHn', 'find_pattern': '<c-r>=g:find_pattern<cr>', 'grep_pattern': '<c-r>=@"<cr>'})
-"nnoremap t4 :call Find("")<left><left>
-nnoremap t4 :call Find2({'find_opts': '. -type f -path', 'find_pattern': '*'})<left><left><left>
-"nnoremap t5 :call Find_cursor()<CR>
-nnoremap t5 :echo "Deprecated"<cr>
-"nnoremap t6 :call Find_yvalue()<CR
-nnoremap t6 :call Find2({'find_opts': '. -type f -path', 'find_pattern': '<c-r>=@"<cr>'})
-nnoremap t7 :call Rcs_status()<CR>
-nnoremap td :Gdiff<CR>
-nnoremap tb :Gblame<CR>
-nnoremap te :execute 'edit' expand('%:p:h')<cr>
 
 "http://stackoverflow.com/questions/2414626/vim-unsaved-buffer-warning
 nnoremap <F5> :exe ":set hidden \| :Ex"<CR>
