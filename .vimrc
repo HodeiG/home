@@ -158,6 +158,8 @@ au BufNewFile,BufRead *.py set
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Quick scape
 inoremap ,, <C-c><right>
+" Quick scape from terminal
+tnoremap ,, <C-\><C-n>
 " Jump to the last modified line and column
 nnoremap '. `.
 " http://stackoverflow.com/questions/235839/how-do-i-indent-multiple-lines-quickly-in-vi
@@ -272,10 +274,14 @@ nnoremap tg :call fzf#vim#grep("rg --column --line-number --no-heading --color=a
 nnoremap tn :bnext<cr>
 nnoremap tp :bprevious<cr>
 nnoremap to <c-w>f
-nnoremap td :Gdiff<CR>
-nnoremap tb :Gblame<CR>
+nnoremap td :GcLog<CR>
+nnoremap tb :Git blame<CR>
 nnoremap t7 :call Rcs_status()<CR>
 nnoremap te :execute 'edit' expand('%:p:h')<cr>
+
+" To navigate in the quickfix window (.i.e: GcLog)
+nnoremap ]q :cnext<CR>
+nnoremap [q :cprev<CR>
 
 " By default CommandT uses the PmenuSel color group.
 " Hence modifying that group to change color. However it would be better if I
