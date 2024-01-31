@@ -107,7 +107,7 @@ Plug 'psf/black'
 " https://github.com/junegunn/fzf.vim
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-
+Plug 'easymotion/vim-easymotion'
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
