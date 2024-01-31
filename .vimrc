@@ -274,14 +274,15 @@ nnoremap tg :call fzf#vim#grep("rg --column --line-number --no-heading --color=a
 nnoremap tn :bnext<cr>
 nnoremap tp :bprevious<cr>
 nnoremap to <c-w>f
-nnoremap td :GcLog<CR>
-nnoremap tb :Git blame<CR>
 nnoremap t7 :call Rcs_status()<CR>
 nnoremap te :execute 'edit' expand('%:p:h')<cr>
 
 " To navigate in the quickfix window (.i.e: GcLog)
-nnoremap ]q :cnext<CR>
-nnoremap [q :cprev<CR>
+nnoremap gl :GcLog<CR>
+nnoremap gb :Git blame<CR>
+nnoremap gd :Git diff<CR>
+nnoremap gn :cnext<CR>
+nnoremap gp :cprev<CR>
 
 " By default CommandT uses the PmenuSel color group.
 " Hence modifying that group to change color. However it would be better if I
