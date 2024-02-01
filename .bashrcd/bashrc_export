@@ -29,6 +29,7 @@ __prompt_command() {
     local BRed="\[\033[1;31m\]"     # Red - Bold
     local BGreen="\[\033[1;32m\]"   # Green
     local BBlue="\[\033[1;34m\]"    # Blue
+    local BPurple="\[\033[1;35m\]"  # Purple
 
     if [ $EXIT != 0 ] ; then
         PS1+="${BRed}${EXIT}${ColorOff}|"      # Add red if exit code non 0
@@ -44,7 +45,15 @@ __prompt_command() {
         PS1+="${BGreen}[${ColorOff}"
     fi
 
-    PS1+="$(date +%H:%M:%S) ${RGreen}\w${ColorOff}"
+    PS1+="$(date +%H:%M:%S)"
+
+    if [ -n "$TMUX" ] ; then
+        num_windows=$(tmux list-windows | wc -l)
+        windows_id=$(tmux display-message -p '#I')
+        PS1+=" ${BPurple}(${windows_id}/${num_windows})${ColorOff}"
+    fi
+
+    PS1+=" ${RGreen}\w${ColorOff}"
 
     GIT_BRANCH=$(git branch 2>/dev/null | awk '/^\*/ {print $2}' 2>/dev/null)
     if [ -n "$GIT_BRANCH" ] ; then
