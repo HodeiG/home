@@ -53,6 +53,13 @@ In Linux install via git and set .Xresources file:
 $ bash -c  "$(curl -fsSL https://raw.githubusercontent.com/officialrajdeepsingh/nerd-fonts-installer/main/install.sh)"
 ```
 
+Execute `fc-list | grep -i nerd` for the different options that can be set in
+.Xresources. For instance:
+
+```
+XTerm*font: xft:JetBrainsMono\ Nerd\ Font:size=11
+```
+
 In Windows install all the fonts downloading them and right click > install
 fonts and set Windows Terminal font to `FiraCode Nerd Font`:
 
