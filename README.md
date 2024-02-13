@@ -1,10 +1,10 @@
 # Custome user linux config
 
-### Installation
+## Installation
 
-As this git project uses Git submodules, clone project using this command:
+Clone the project using this command:
 ```sh
-git clone --recurse-submodules git@github.com:HodeiG/home.git
+git clone git@github.com:HodeiG/home.git
 ```
 
 Once the project has been cloned, create a software link to the files that want
@@ -16,7 +16,57 @@ Finally, modify your .bashrc and append the following line at the end of file.
 source $HOME/.my_bashrc
 ```
 
-### Development
+## Dependencies
+
+### FZF:
+
+Install via apt `apt install fzf` or using `git`:
+
+```bash
+$ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+$ ~/.fzf/install
+```
+
+### Ripgrep [rust]
+
+$ Install it via cargo:
+
+```bash
+$ cargo install ripgrep
+```
+
+### Zellij (multiplexer)
+
+Install via cargo:
+
+```bash
+$ cargo install zellij
+$ mkdir ~/.config/zellij
+$ zellij setup --dump-config > ~/.config/zellij/config.kdl
+```
+
+### Nerd Fonts
+
+In Linux install via git and set .Xresources file:
+
+```bash
+$ git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
+$ cd nerd-fonts
+$ ./install.sh
+$ cat ~/.Xresources
+URxvt*font:    xft:Hack Nerd Font:style=Regular:size=11
+```
+
+In Windows install all the fonts downloading them and right click > install
+fonts and set Windows Terminal font to `FiraCode Nerd Font`:
+
+```
+curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz
+```
+
+### LSDeluxe (lsd) [rust]
+
+# Development
 
 Create a new SSH key, add private key identity to the authentication agent and
 upload the public key to github.
