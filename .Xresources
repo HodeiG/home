@@ -21,7 +21,9 @@ XTerm*cursorOffTime:600
 ! Specifies whether or not the scrollbar should be displayed. The default is
 ! ``false.''
 XTerm*scrollBar:False
-XTerm*faceName: Monospace
+! XTerm*faceName: Monospace
+! XTerm*faceName: Monospace
+XTerm*font: xft:FiraCode\ Nerd\ Font:size=11
 XTerm*faceSize: 11
 ! Make dark blue lighter.
 XTerm.VT100.color4: CornflowerBlue

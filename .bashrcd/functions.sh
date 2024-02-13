@@ -1,4 +1,10 @@
 #! /bin/bash
+#
+# ALIASES
+alias cd='_cl' # Change directory and ls
+alias pwd='_pwd' # Change directory and ls
+alias ..='_go_back' # Change directory and ls
+
 
 DGREEN='\e[0;1;32m'
 NC='\e[0m' #No color
@@ -107,34 +113,3 @@ function try {
     done
 }
 
-function _cdf {
-    if [ -z "$1" ] ; then
-        FIND=$(find . -type d | grep -v "/\.")
-    else
-        FIND=$(find . -type d -name "$1" | grep -v "/\.")
-    fi
-    FIND_AMOUNT=$(echo "${FIND}" | wc -l)
-    if [ -z "$FIND" ] ; then
-        echo "Cannot find directory any directory."
-        return 1
-    elif [ "${FIND_AMOUNT}" -gt "1" ] ; then
-        XPATH=$(_choose_option "$FIND")
-    else
-        XPATH=$FIND
-    fi
-    if [ ! -z "$XPATH" ] ; then
-        OLD_PWD=$PWD
-        _cl "$XPATH"
-        echo "$OLD_PWD >>> $PWD"
-    fi
-}
-
-function _gitmeld_commit {
-    if [ -z "$1" ] ; then
-        COMMITID=$(git log -n 1 | grep -Po "(?<=^commit )(.*)")
-    else
-        COMMITID=$1
-    fi
-    git difftool --dir-diff $COMMITID~ $COMMITID --tool meld -y
-    echo "$COMMITID"
-}

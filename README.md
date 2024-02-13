@@ -50,11 +50,7 @@ $ zellij setup --dump-config > ~/.config/zellij/config.kdl
 In Linux install via git and set .Xresources file:
 
 ```bash
-$ git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
-$ cd nerd-fonts
-$ ./install.sh
-$ cat ~/.Xresources
-URxvt*font:    xft:Hack Nerd Font:style=Regular:size=11
+$ bash -c  "$(curl -fsSL https://raw.githubusercontent.com/officialrajdeepsingh/nerd-fonts-installer/main/install.sh)"
 ```
 
 In Windows install all the fonts downloading them and right click > install
