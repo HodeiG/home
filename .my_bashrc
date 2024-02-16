@@ -6,7 +6,6 @@ if [ -f /etc/bashrc ]; then
 fi
 
 source $HOME/.bashrcd/bashrc_export
-source $HOME/.bashrcd/aliases_functions
+source $HOME/.bashrcd/aliases
 source $HOME/.bashrcd/functions.sh
 source $HOME/.bashrcd/bashrc_exec
-source $HOME/.bashrcd/shrc_aliases_default

@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+if which lsd &> /dev/null ; then
+    alias ls='lsd'
+else
+    alias ls='ls --color=auto'
+    alias lr='ls -rt'
+    alias ll='ls -lrt'
+    alias la='ls -a'
+    alias ld='ls -p | grep "/" | sed -e "s/\///g" -e "s/$/\"/g" -e "s/^/\"/g"'
+    alias lss="ll -a | grep '^l' | awk '{ print \$(9) }' | xargs ls -la --color=auto"
+fi
+alias z="~/.local/bin/start_zellij.sh"
+alias rm='rm -v'
+
+# Force calendar start on Monday rather that on Sunday
+# -b: Use oldstyle format for ncal output
+# -M: Weeks start on Monday
+# -3 Display the previous, current and next month surrounding today.
+alias cal='ncal -b -M -3'
+alias gitmeld_no_cached='git difftool -y --dir-diff --tool meld'
+alias gitmeld_cached='git difftool -y --dir-diff --cached --tool meld'
+alias gitmeld_commit='_gitmeld_commit'
+# https://stackoverflow.com/a/15659938
+alias gitmeld_stash='git difftool -y --dir-diff --tool meld stash@{0}^!'
