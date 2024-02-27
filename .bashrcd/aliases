@@ -20,6 +20,7 @@ alias rm='rm -v'
 alias cal='ncal -b -M -3'
 alias gitmeld_no_cached='git difftool -y --dir-diff --tool meld'
 alias gitmeld_cached='git difftool -y --dir-diff --cached --tool meld'
-alias gitmeld_commit='_gitmeld_commit'
+alias gitmeld_commit="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit | fzf | awk '{print \$1}' | xargs -I{} git difftool --dir-diff {}~ {} --tool meld -y"
+
 # https://stackoverflow.com/a/15659938
 alias gitmeld_stash='git difftool -y --dir-diff --tool meld stash@{0}^!'
