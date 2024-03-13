@@ -88,11 +88,9 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+# move container to prev/next workspace:
+bindsym $mod+Shift+Left move to workspace prev
+bindsym $mod+Shift+Right move to workspace next
 
 # split in horizontal orientation
 bindsym $mod+o split h
