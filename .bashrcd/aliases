@@ -10,7 +10,6 @@ else
     alias ld='ls -p | grep "/" | sed -e "s/\///g" -e "s/$/\"/g" -e "s/^/\"/g"'
     alias lss="ll -a | grep '^l' | awk '{ print \$(9) }' | xargs ls -la --color=auto"
 fi
-alias z="~/.local/bin/start_zellij.sh"
 alias rm='rm -v'
 
 # Force calendar start on Monday rather that on Sunday

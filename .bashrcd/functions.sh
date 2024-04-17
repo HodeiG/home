@@ -4,6 +4,7 @@
 alias cd='_cl' # Change directory and ls
 alias pwd='_pwd' # Change directory and ls
 alias ..='_go_back' # Change directory and ls
+alias z='_start_zellij' # Change directory and ls
 
 
 DGREEN='\e[0;1;32m'
@@ -113,3 +114,23 @@ function try {
     done
 }
 
+function _start_zellij {
+    if [ "$#" -gt 0 ]; then
+        zellij "$@"
+    else
+        SESSIONS=$(zellij ls | grep -v EXITED | awk '{print $1}')
+        NUM_SESSIONS=$(echo "$SESSIONS" | wc -l)
+        if [ -n "$SESSIONS" ]; then
+            if [ "$NUM_SESSIONS" -eq 1 ]; then
+                zellij attach
+            else
+                SELECTED_SESSION=$(echo "$SESSIONS" | fzf --ansi)
+                if [ -n "$SELECTED_SESSION" ]; then
+                    zellij attach "$SELECTED_SESSION"
+                fi
+            fi
+        else
+            zellij setup
+        fi
+    fi
+}
